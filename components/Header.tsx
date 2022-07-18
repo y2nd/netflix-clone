@@ -27,7 +27,7 @@ const Header: React.FC = () => {
   return (
     <header className={`${isScrolled && "bg-BLACK-PRIMARY"}`}>
       <nav className="flex items-center space-x-2 md:space-x-10">
-        <Image
+        <img
           src={"/Netflix_logo.svg"}
           alt={"Netflix 2015 logo"}
           width={100}
