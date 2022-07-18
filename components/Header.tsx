@@ -26,7 +26,7 @@ const Header: React.FC = () => {
 
   return (
     <header className={`${isScrolled && "bg-BLACK-PRIMARY"}`}>
-      <div className="flex items-center space-x-2 md:space-x-10">
+      <nav className="flex items-center space-x-2 md:space-x-10">
         <Image
           src={"/Netflix_logo.svg"}
           alt={"Netflix 2015 logo"}
@@ -42,7 +42,7 @@ const Header: React.FC = () => {
           <li className="header-link">New & Popular</li>
           <li className="header-link">My List</li>
         </ul>
-      </div>
+      </nav>
       <div className="flex items-center space-x-4 text-sm font-light">
         <SearchIcon className="hidden sm:inline h-6 w-6" />
         <p className="hidden lg:inline">Kids</p>
