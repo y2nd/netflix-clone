@@ -6,7 +6,7 @@
 /* html, body, heading, h1, h2 ... */
 @layer base {
     body {
-        @apply bg-BLACK text-white;
+        @apply bg-BLACK-PRIMARY text-white;
     }
 
     header {

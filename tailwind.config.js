@@ -11,7 +11,10 @@ module.exports = {
           LIGHT: "#e5e5e5",
           DARK: "#b3b3b3"
         },
-        BLACK: "#141414"
+        BLACK: {
+          PRIMARY :"#141414",
+          GRADIENT: "#010511"
+        }
       },
     },
     
