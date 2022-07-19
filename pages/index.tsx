@@ -29,7 +29,7 @@ const Home = ({
   trendingNow,
 }: Props) => {
   return (
-    <div className="relative h-screen bg-gradient-to-bl from-gray-900/10 to-BLACK-GRADIENT lg:h-[140vh]">
+    <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-BLACK-GRADIENT lg:h-[140vh]">
       <Head>
         <title>Netflix Clone</title>
         <link rel="icon" href="/favicon.ico" />
