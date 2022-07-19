@@ -14,10 +14,13 @@ module.exports = {
         BLACK: {
           PRIMARY :"#141414",
           GRADIENT: "#010511"
+        },
+        WHITE: {
+          PRIMARY: "#e5e5e5",
         }
       },
     },
     
   },
-  plugins: [require("tailwindcss-textshadow")],
+  plugins: [require("tailwindcss-textshadow"), require("tailwind-scrollbar-hide")],
 }

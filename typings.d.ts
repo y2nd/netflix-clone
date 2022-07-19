@@ -12,8 +12,10 @@ export interface Movie {
     genre_ids: number[]
     id: number
     name: string
+    title: string
     origin_country: string[]
     original_language: string
+    original_title: string
     original_name: string
     overview: string
     popularity: number
