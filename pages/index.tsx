@@ -58,6 +58,7 @@ const Home = ({
 export default Home;
 
 export const getServerSideProps = async () => {
+  
   const [
     netflixOriginals,
     trendingNow,
@@ -76,7 +77,7 @@ export const getServerSideProps = async () => {
     fetch(requests.fetchHorrorMovies).then((res) => res.json()),
     fetch(requests.fetchRomanceMovies).then((res) => res.json()),
     fetch(requests.fetchDocumentaries).then((res) => res.json()),
-  ]);
+  ])
 
   return {
     props: {
@@ -89,5 +90,5 @@ export const getServerSideProps = async () => {
       romanceMovies: romanceMovies.results,
       documentaries: documentaries.results,
     },
-  };
-};
+  }
+}
