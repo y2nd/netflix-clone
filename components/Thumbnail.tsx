@@ -14,7 +14,7 @@ const Thumbnail = ({ movie }: Props) => {
         }`}
         alt={movie.name}
         layout="fill"
-        className="rounded-sm object-cover md:rounded z-0"
+        className="rounded-sm object-cover md:rounded "
         />
 
         <div className="w-full h-full flex items-center justify-center bg-gray-500 transition duration-300 opacity-0 hover:opacity-80 rounded-sm">
