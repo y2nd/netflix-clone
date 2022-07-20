@@ -9,7 +9,11 @@ module.exports = {
       colors: {
         GREY: {
           LIGHT: "#e5e5e5",
-          DARK: "#b3b3b3"
+          DARK: {
+            100: "#b3b3b3",
+            200: "#454545",
+            300: "#333",
+          }
         },
         BLACK: {
           PRIMARY :"#141414",
@@ -17,6 +21,9 @@ module.exports = {
         },
         WHITE: {
           PRIMARY: "#e5e5e5",
+        },
+        RED: {
+          PRIMARY: "#e50914"
         }
       },
       backgroundImage: {
