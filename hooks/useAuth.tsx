@@ -10,7 +10,30 @@ import { useRouter } from "next/router";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { auth } from "../firebase";
 
-const useAuth = () => {
+interface IAuth {
+    user: User | null;
+    signUp: (email: string, password: string) => Promise<void>;
+    SignIn: (email: string, password: string) => Promise<void>;
+    logout: () => Promise<void>;
+    error: string | null;
+    loading: boolean;
+}
+
+const AuthContext = createContext<IAuth>({
+    user: null,
+    signUp: async () => {},
+    SignIn: async () => {},
+    logout: async () => {},
+    error: null,
+    loading: false
+});
+
+interface AuthProviderProps {
+    children: React.ReactNode
+}
+
+
+export const AuthProvider = ( {children} : AuthProviderProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
@@ -50,6 +73,11 @@ const useAuth = () => {
       .finally(() => setLoading(false));
   };
   return;
+//   return <AuthContext.Provider value={}>
+//     {children}
+//   </AuthContext.Provider>;
 };
 
-export default useAuth;
+export default function useAuth() {
+    return useContext(AuthContext);
+}
