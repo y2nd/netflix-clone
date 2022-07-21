@@ -37,7 +37,7 @@ export const AuthProvider = ( {children} : AuthProviderProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
-
+  const [error, setError] = useState(null);
   const signUp = async (email: string, password: string) => {
     setLoading(true);
     await createUserWithEmailAndPassword(auth, email, password)
@@ -72,10 +72,14 @@ export const AuthProvider = ( {children} : AuthProviderProps) => {
       .catch((error) => alert(error.message))
       .finally(() => setLoading(false));
   };
+
+  const memoedValue = useMemo(() => ({
+	user, signUp, signIn, loading, logout, error
+}), [user, loading, errort]);
   return;
-//   return <AuthContext.Provider value={}>
-//     {children}
-//   </AuthContext.Provider>;
+  	return <AuthContext.Provider value={memoedValue}>
+		{children}
+	</AuthContext.Provider>;
 };
 
 export default function useAuth() {
