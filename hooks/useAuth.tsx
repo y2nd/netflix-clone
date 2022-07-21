@@ -50,7 +50,7 @@ export const AuthProvider = ( {children} : AuthProviderProps) => {
       .finally(() => setLoading(false));
   };
 
-  const SignIn = async (email: string, password: string) => {
+  const signIn = async (email: string, password: string) => {
     setLoading(true);
 
     await signInWithEmailAndPassword(auth, email, password)
@@ -75,8 +75,8 @@ export const AuthProvider = ( {children} : AuthProviderProps) => {
 
   const memoedValue = useMemo(() => ({
 	user, signUp, signIn, loading, logout, error
-}), [user, loading, errort]);
-  return;
+}), [user, loading, error]);
+  
   	return <AuthContext.Provider value={memoedValue}>
 		{children}
 	</AuthContext.Provider>;
