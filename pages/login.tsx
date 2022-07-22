@@ -27,13 +27,16 @@ const login = () => {
     }
   };
 
-  const formatError = (error: string | null):string | null =>  {
-    if(error === "Firebase: Error (auth/email-already-in-use).") 
+  const formatError = (error: string | null): string | null => {
+    if (error === "Firebase: Error (auth/email-already-in-use).")
       return "The provided email is already in use by an existing user - Please sign in instead";
-    else if(error === "Firebase: Error (auth/wrong-password)." || error === "Firebase: Error (auth/user-not-found).")
+    else if (
+      error === "Firebase: Error (auth/wrong-password)." ||
+      error === "Firebase: Error (auth/user-not-found)."
+    )
       return "invalid email or password";
     return error;
-  }
+  };
 
   return (
     <div className="relative flex h-screen w-screen flex-col bg-black md:items-center md:justify-center md:bg-transparent">
@@ -74,9 +77,7 @@ const login = () => {
             />
           </label>
           {errors.email && (
-            <p className="alert-message">
-              Please enter a valid email
-            </p>
+            <p className="alert-message">Please enter a valid email</p>
           )}
           <label className="inline-block w-full">
             <input
