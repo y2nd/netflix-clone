@@ -47,6 +47,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         // Logged in...
         setUser(user);
         setLoading(false);
+        router.push('/');
       } else {
         // Not loggen in ...
         setUser(null);
@@ -65,7 +66,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         router.push("/");
         setLoading(false);
       })
-      .catch((error) => alert(error.message))
+      .catch((error) => setError(error.message))
       .finally(() => setLoading(false));
   };
 
@@ -78,7 +79,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         router.push("/");
         setLoading(false);
       })
-      .catch((error) => alert(error.message))
+      .catch((error) => setError(error.message))
       .finally(() => setLoading(false));
   };
 

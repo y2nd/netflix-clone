@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import requests from "../utils/requests";
 import { Movie } from "../typings";
 import Row from "../components/Row";
+import useAuth from "../hooks/useAuth";
 
 interface Props {
   netflixOriginals: Movie[];
@@ -28,7 +29,13 @@ const Home = ({
   topRated,
   trendingNow,
 }: Props) => {
-  return (
+
+  const { loading } = useAuth();
+
+  if(loading) 
+    return <h1 className="text-xl font-bold">Loading</h1>
+  else 
+    return (
     <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-BLACK-GRADIENT lg:h-[140vh]">
       <Head>
         <title>Netflix Clone</title>

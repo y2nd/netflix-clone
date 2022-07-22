@@ -27,4 +27,8 @@
     .input {
         @apply w-full rounded bg-GREY-DARK-300 px-5 py-3.5 placeholder-[gray] placeholder:italic outline-none focus:bg-GREY-DARK-200
     }
+
+    .alert-message {
+        @apply p-1 text-[13px] font-light text-orange-500;
+    }
 }
