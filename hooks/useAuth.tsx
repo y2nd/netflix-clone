@@ -11,33 +11,52 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { auth } from "../firebase";
 
 interface IAuth {
-    user: User | null;
-    signUp: (email: string, password: string) => Promise<void>;
-    SignIn: (email: string, password: string) => Promise<void>;
-    logout: () => Promise<void>;
-    error: string | null;
-    loading: boolean;
+  user: User | null;
+  signUp: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
+  error: string | null;
+  loading: boolean;
 }
 
 const AuthContext = createContext<IAuth>({
-    user: null,
-    signUp: async () => {},
-    SignIn: async () => {},
-    logout: async () => {},
-    error: null,
-    loading: false
+  user: null,
+  signUp: async () => {},
+  signIn: async () => {},
+  logout: async () => {},
+  error: null,
+  loading: false,
 });
 
 interface AuthProviderProps {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 
-
-export const AuthProvider = ( {children} : AuthProviderProps) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); // you can set a UI using the error value
+
+  const [initialLoading, setInitialLoading] = useState<boolean>(true);
+
+  //persisting the user
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Logged in...
+        setUser(user);
+        setLoading(false);
+      } else {
+        // Not loggen in ...
+        setUser(null);
+        setLoading(true);
+        router.push("/login");
+      }
+      setInitialLoading(false);
+    });
+  }, [auth]);
+
   const signUp = async (email: string, password: string) => {
     setLoading(true);
     await createUserWithEmailAndPassword(auth, email, password)
@@ -73,15 +92,25 @@ export const AuthProvider = ( {children} : AuthProviderProps) => {
       .finally(() => setLoading(false));
   };
 
-  const memoedValue = useMemo(() => ({
-	user, signUp, signIn, loading, logout, error
-}), [user, loading, error]);
-  
-  	return <AuthContext.Provider value={memoedValue}>
-		{children}
-	</AuthContext.Provider>;
+  const memoedValue = useMemo(
+    () => ({
+      user,
+      signUp,
+      signIn,
+      loading,
+      logout,
+      error,
+    }),
+    [user, loading, error]
+  );
+
+  return (
+    <AuthContext.Provider value={memoedValue}>
+      {!initialLoading && children}
+    </AuthContext.Provider>
+  );
 };
 
 export default function useAuth() {
-    return useContext(AuthContext);
+  return useContext(AuthContext);
 }
