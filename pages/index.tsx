@@ -11,6 +11,7 @@ import { useState } from "react";
 import { modalState } from "../atoms/modalAtom";
 import { useRecoilValue } from "recoil";
 import Modal from "../components/Modal";
+import Plans from "../components/Plans";
 
 interface Props {
   netflixOriginals: Movie[];
@@ -37,11 +38,18 @@ const Home = ({
   const { loading } = useAuth();
   
   const showModal = useRecoilValue(modalState);
+  const subscription = false;
 
   // const [showModal, setShowModal] = useState<boolean>(false);
 
+  if(subscription === null) 
+    return null;
+  
   if(loading) 
-    return <h1 className="text-xl font-bold">Loading</h1>
+    return <h1 className="text-xl font-bold">Loading</h1>; 
+
+    if(!subscription) 
+    return <Plans />
   else 
     return (
     <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-BLACK-GRADIENT lg:h-[140vh]">
