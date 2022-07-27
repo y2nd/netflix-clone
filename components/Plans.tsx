@@ -1,10 +1,16 @@
 import { CheckIcon } from "@heroicons/react/solid";
+import { Product } from "@stripe/firestore-stripe-payments";
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import useAuth from "../hooks/useAuth";
 
-const Plans = () => {
+
+interface Props {
+  products: Product[];
+}
+
+const Plans = ( {products}: Props) => {
   const { logout } = useAuth();
 
   const iconStyles = "h-7 w-7 text-[#E50914]";
@@ -58,6 +64,7 @@ const Plans = () => {
 
           {/* <Table /> */}
           <button>Susbcribe</button>
+          
         </div>
       </main>
     </div>
