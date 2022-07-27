@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Loader from "../components/Loader";
 import useAuth from "../hooks/useAuth";
@@ -12,11 +11,7 @@ type Inputs = {
 };
 
 const login = () => {
-  const [login, setLogin] = useState<boolean>(false);
-  const { signIn, signUp, error, loading } = useAuth();
-
-  console.log(loading);
-
+  const { signUp, error, loading } = useAuth();
   const {
     register,
     handleSubmit,
@@ -24,11 +19,7 @@ const login = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
-    if (login) {
-      await signIn(email, password);
-    } else {
-      await signUp(email, password);
-    }
+    await signUp(email, password);
   };
 
   const formatError = (error: string | null): string | null => {
@@ -69,7 +60,7 @@ const login = () => {
         className="relative mt-24 space-y-8 rounded bg-black/75 py-10 px-6 md:mt-0 md:max-w-md md:px-14"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <h1 className="text-4xl font-semibold">Sign In</h1>
+        <h1 className="text-4xl font-semibold">Sign Up</h1>
         <p className="alert-message">{formatError(error)}</p>
         <div className="space-y-4">
           <label className="inline-block w-full">
@@ -102,17 +93,16 @@ const login = () => {
           )}
         </div>
 
-        <button
-          className="w-full rounded bg-RED-PRIMARY py-3 font-semibold"
-          onClick={() => setLogin(true)}
-        >
-          {loading ? <Loader color="dark:fill-gray-300" /> : `Sign In`}
+        <button className="w-full rounded bg-RED-PRIMARY py-3 font-semibold">
+          {loading ? <Loader color="dark:fill-gray-300" /> : `Sign Up`}
         </button>
 
         <div className="flex space-x-1 text-[gray]">
-          <p>New to Netflix?</p>
-          <Link href={"/signup"}>
-            <p className="text-white hover:underline cursor-pointer">Sign Up now</p>
+          <p>Already have an account ?</p>
+          <Link href={"/login"}>
+            <p className="text-white hover:underline cursor-pointer">
+              Sign In now
+            </p>
           </Link>
         </div>
       </form>

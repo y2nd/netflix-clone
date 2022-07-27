@@ -47,14 +47,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         // Logged in...
         setUser(user);
         setLoading(false);
-        if(router.pathname === "/login"){
-          router.push('/');
+        if (router.pathname === "/login") {
+          router.push("/");
         }
       } else {
         // Not loggen in ...
         setUser(null);
-        setLoading(true);
-        router.push("/login");
+        if (router.pathname !== "/login") {
+          router.push("/signup");
+        }
       }
       setInitialLoading(false);
     });
