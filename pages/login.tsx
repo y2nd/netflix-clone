@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import Loader from "../components/Loader";
 import useAuth from "../hooks/useAuth";
 
 type Inputs = {
@@ -11,7 +12,7 @@ type Inputs = {
 
 const login = () => {
   const [login, setLogin] = useState<boolean>(false);
-  const { signIn, signUp, error } = useAuth();
+  const { signIn, signUp, error, loading } = useAuth();
 
   const {
     register,
@@ -102,7 +103,7 @@ const login = () => {
           className="w-full rounded bg-RED-PRIMARY py-3 font-semibold"
           onClick={() => setLogin(true)}
         >
-          Sign In
+          { loading ? (<Loader color="dark:fill-gray-300"/>) : `Sign In` }
         </button>
 
         <div className="flex space-x-1 text-[gray]">
