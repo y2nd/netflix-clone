@@ -5,17 +5,26 @@ import Head from "next/head";
 import Link from "next/link";
 import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
+import Loader from "./Loader";
+import { loadCheckout } from "../lib/stripe";
 
 interface Props {
   products: Product[];
 }
 
 const Plans = ({ products }: Props) => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2]);
+  const [isBillingLoading, setIsBillingLoading] = useState<boolean>(false);
 
   const iconStyles = "h-7 w-7 text-[#E50914]";
   const liStyles = "flex items-center gap-x-2 text-lg";
+
+  const subscribeToPlan = () => {
+    if(!user) return;
+    loadCheckout(selectedPlan?.prices[0].id!);
+    setIsBillingLoading(true);
+  }
 
   return (
     <div>
@@ -58,22 +67,29 @@ const Plans = ({ products }: Props) => {
 
         <div className="mt-4 flex flex-col space-y-4">
           <div className="flex w-full items-center justify-end self-end md:w-3/5">
-            {products.map( (product) => (
+            {products.map((product) => (
               <div
-              className={`plan-box cursor-pointer ${
-                selectedPlan?.id === product.id ? 'opacity-100' : 'opacity-60'
-              }`}
-              key={product.id}
-              onClick={() => setSelectedPlan(product)}
-              
-            >
-              {product.name}
-            </div>
+                className={`plan-box cursor-pointer ${
+                  selectedPlan?.id === product.id ? "opacity-100" : "opacity-60"
+                }`}
+                key={product.id}
+                onClick={() => setSelectedPlan(product)}
+              >
+                {product.name}
+              </div>
             ))}
           </div>
 
           <Table products={products} selectedPlan={selectedPlan} />
-          <button>Susbcribe</button>
+          <button
+            disabled={!selectedPlan || isBillingLoading}
+            className={`mx-auto w-11/12 rounded bg-[#E50914] py-4 text-xl shadow hover:bg-[#f6121d] md:w-[420px] ${
+              isBillingLoading && "opacity-60"
+            }`}
+            onClick={subscribeToPlan}
+          >
+            {isBillingLoading ? (<Loader color="dark:fill-gray-300"/>) : "Subscribe"}
+          </button>
         </div>
       </main>
     </div>
