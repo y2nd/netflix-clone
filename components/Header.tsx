@@ -48,14 +48,13 @@ const Header: React.FC = () => {
         <SearchIcon className="hidden sm:inline h-6 w-6" />
         <p className="hidden lg:inline">Kids</p>
         <BellIcon className="h-6 w-6" />
-        {/* <Link href="/account"> */}
-        <img
-          src="/profile-pic.png"
-          alt="profile picture"
-          className="cursor-pointer rounded"
-          onClick={logout}
-        />
-        {/* </Link> */}
+        <Link href="/account">
+          <img
+            src="/profile-pic.png"
+            alt="profile picture"
+            className="cursor-pointer rounded"
+          />
+        </Link>
       </div>
     </header>
   );
