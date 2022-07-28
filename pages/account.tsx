@@ -17,7 +17,6 @@ const account = ({ products }: Props) => {
   const subscription = useSubscription(user);
 
   const array = products.filter( (product) => product.id === subscription?.product);
-  console.log(array[0]?.name);
 
   return (
     <div>

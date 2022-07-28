@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import useSubscription from "../hooks/useSubscription";
+import { goToBillingPortal } from "../lib/stripe";
 import Loader from "./Loader";
 
 const Membership = () => {
@@ -8,10 +9,13 @@ const Membership = () => {
   const { user } = useAuth();
   const subscription = useSubscription(user);
 
+  
   const manageSubscription = () => {
     if(subscription) {
+        console.log(subscription);
         setIsBillingLoading(true);
-        // goToBillingPortal();
+        goToBillingPortal();
+        setIsBillingLoading(false);
     }
   };
 
@@ -22,7 +26,7 @@ const Membership = () => {
         <button
           className="bg-gray-300 text-black h-10 w-3/5 whitespace-nowrap py-2 text-sm font-medium shadow-md hover:bg-gray-200 md:w-4/5 rounded"
           disabled={isBillingLoading || !subscription}
-        //   onClick={manageSubscription}
+          onClick={manageSubscription}
         >
           {isBillingLoading ? (
             <Loader color="dark:fill-[#e50914]" />

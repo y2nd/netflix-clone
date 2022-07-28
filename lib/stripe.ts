@@ -29,5 +29,5 @@ const goToBillingPortal = async () => {
     }).then( ({data}: any) => window.location.assign(data.url)).catch((error) => console.log(error.message));
 }
 
-export { loadCheckout };
+export { loadCheckout, goToBillingPortal };
 export default payments;
