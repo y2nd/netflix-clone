@@ -55,10 +55,21 @@ const Membership = () => {
           </div>
         </div>
 
-        <div className="">
+        <div className="flex flex-col justify-between pt-4 pb-4 md:flex-row md:pb-0">
           <div className="">
-            <p>{subscription?.cancel_at_period_end ? "Your membership will end on " : " Your next billing date is "}
-            {subscription?.current_period_end}</p>
+            <p>
+              {subscription?.cancel_at_period_end
+                ? "Your membership will end on "
+                : " Your next billing date is "}
+              {subscription?.current_period_end}
+            </p>
+          </div>
+
+          <div className="md:text-right">
+            <p className="membership-link">Manage payment info</p>
+            <p className="membership-link">Add buckup payment method</p>
+            <p className="membership-link">Billing Details</p>
+            <p className="membership-link">Change billing day</p>
           </div>
         </div>
       </div>
