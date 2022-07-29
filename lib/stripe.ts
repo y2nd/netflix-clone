@@ -21,13 +21,17 @@ const loadCheckout = async (priceId: string) => {
 };
 
 const goToBillingPortal = async () => {
-    const instance = getFunctions(app, "europe-west");
-    const functionRef = httpsCallable(instance, "ext-firestore-stripe-payments-createPortalLink");
+  const instance = getFunctions(app, 'europe-west1');
+  const functionRef = httpsCallable(
+    instance,
+    'ext-firestore-stripe-payments-createPortalLink'
+  );
 
-    await functionRef({
-        returnUrl: `${window.location.origin}/account`
-    }).then( ({data}: any) => window.location.assign(data.url)).catch((error) => console.log(error.message));
+  await functionRef({
+    returnUrl: `${window.location.origin}/account`,
+  })
+    .then(({ data }: any) => window.location.assign(data.url))
+    .catch((error) => console.log(error.message))
 }
-
 export { loadCheckout, goToBillingPortal };
 export default payments;
