@@ -1,4 +1,4 @@
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import useSubscription from "../hooks/useSubscription";
@@ -25,7 +25,7 @@ const Membership = () => {
         <h4 className="text-lg text-[gray]">Membership & Billing</h4>
         {subscription ? (
           <button
-            className="bg-gray-300 text-black h-10 w-3/5 whitespace-nowrap py-2 text-sm font-medium shadow-md hover:bg-gray-200 md:w-4/5 rounded"
+            className="account-button"
             disabled={isBillingLoading || !subscription}
             onClick={manageSubscription}
           >
@@ -35,7 +35,32 @@ const Membership = () => {
               "Cancel Membership"
             )}
           </button>
-        ) : <button className="bg-gray-300 text-black h-10 w-3/5 whitespace-nowrap py-2 text-sm font-medium shadow-md hover:bg-gray-200 md:w-4/5 rounded" onClick={() => router.push('/')}>Subscribe to a plan</button>}
+        ) : (
+          <button className="account-button" onClick={() => router.push("/")}>
+            Subscribe to a plan
+          </button>
+        )}
+      </div>
+
+      <div className="col-span-3">
+        <div className="flex flex-col justify-between border-b border-white/10 py-4 md:flex-row">
+          <div className="">
+            <p className="font-medium">{user?.email}</p>
+            <p className="text-[gray]">**********</p>
+          </div>
+
+          <div className="md:text-right">
+            <p className="membership-link">Change email</p>
+            <p className="membership-link">Change password</p>
+          </div>
+        </div>
+
+        <div className="">
+          <div className="">
+            <p>{subscription?.cancel_at_period_end ? "Your membership will end on " : " Your next billing date is "}
+            {subscription?.current_period_end}</p>
+          </div>
+        </div>
       </div>
     </div>
   );
