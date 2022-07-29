@@ -1,4 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline"
+import { DocumentData } from "firebase/firestore"
 import { useRef, useState } from "react"
 import { Movie } from "../typings"
 import Thumbnail from "./Thumbnail"
@@ -6,7 +7,7 @@ import Thumbnail from "./Thumbnail"
 
 interface Props {
     title: string,
-    movies: Movie[]
+    movies: Movie[] | DocumentData[],
 }
 
 const Row = ({title, movies}: Props) => {

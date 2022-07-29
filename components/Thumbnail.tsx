@@ -3,9 +3,10 @@ import { BASE_URL_IMAGE } from "../constants/movie";
 import { Movie } from "../typings";
 import { useRecoilState } from "recoil";
 import { modalState, movieState } from "../atoms/modalAtom";
+import { DocumentData } from "firebase/firestore";
 
 interface Props {
-  movie: Movie;
+  movie: Movie | DocumentData,
 }
 const Thumbnail = ({ movie }: Props) => {
   const [showModal, setShowModal] = useRecoilState(modalState);
