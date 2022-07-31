@@ -1,7 +1,7 @@
 
 # Netflix Clone
 
-A web app built using NextJs and TailwindCSS, with full user authentication. It uses Firebase to store user data. It uses the tmdb API to retrieve movie data. The project was built using Typescript.
+A web app built using NextJs and TailwindCSS, with full user authentication. It uses Firebase to store user data. It uses the tmdb API to retrieve movie data. The project was built using Typescript. The live demo website may be blocked for an attempt of phishing, just proceed.
 
 
 ##  Install dependecies
